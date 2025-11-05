@@ -1,0 +1,32 @@
+{
+  "name": "duogis",
+  "version": "1.0.0",
+  "description": "DuoGIS - Interactive Map Application",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node server.js"
+  },
+  "keywords": [
+    "map",
+    "openlayers",
+    "gis"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ol": "^10.7.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
+    "vite": "^7.2.0"
+  }
+}

@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Feather Bold';
+  src: url('../assets/font/Duolingo Feather Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Feather Bold', sans-serif;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+}

@@ -1,0 +1,226 @@
+.main-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  transition: background-color 0.3s ease; /* Fade efekti */
+}
+
+.main-page.dark-mode {
+  background-color: #4b4b4b;
+}
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f7f7f7;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  /* box-shadow removed */
+  z-index: 100;
+  transition: background-color 0.3s ease;
+}
+
+.main-page.dark-mode .top-bar {
+  background-color: #4b4b4b;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.stat-value {
+  font-weight: bold;
+  font-size: 1rem;
+  color: transparent;
+}
+
+.stat-item:nth-child(1) .stat-value {
+  text-shadow: 0 0 0 #FF9600;
+}
+
+.stat-item:nth-child(2) .stat-value {
+  text-shadow: 0 0 0 #1CB0F6;
+}
+
+.stat-item:nth-child(3) .stat-value {
+  text-shadow: 0 0 0 #FF4B4B;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+}
+
+.dark-mode-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  border-radius: 16px; /* round-2 */
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  gap: 0;
+  padding: 1rem;
+  padding-top: 160px;
+  padding-bottom: 90px;
+  height: calc(100vh - 160px);
+  justify-content: center;
+  align-items: center;
+}
+
+.hover-container {
+  background-color: white;
+  border: 2px solid #d3d3d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 60%;
+  transition: border-color 0.3s ease; /* Fade efekti */
+}
+
+.main-page.dark-mode .hover-container {
+  border-color: #666; /* Dark mode'da koyu gri kenar */
+}
+
+.left-panel {
+  width: 20%;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.05), rgba(88, 204, 2, 0.02));
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-right: 2px solid #d3d3d3;
+  transition: border-color 0.3s ease; /* Fade efekti */
+}
+
+.main-page.dark-mode .left-panel {
+  border-right-color: #666; /* Dark mode'da koyu gri kenar */
+}
+
+.center-panel {
+  width: 40%;
+  position: relative;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-left: 2px solid #d3d3d3;
+  transition: border-color 0.3s ease; /* Fade efekti */
+}
+
+.main-page.dark-mode .center-panel {
+  border-left-color: #666; /* Dark mode'da koyu gri kenar */
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.placeholder-text {
+  color: #58cc02;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.leaderboard {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderboard h3 {
+  color: #58cc02;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background-color: rgba(88, 204, 2, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #58cc02;
+  transition: background-color 0.2s ease;
+}
+
+.leaderboard-item:hover {
+  background-color: rgba(88, 204, 2, 0.1);
+}
+
+.leaderboard-item .rank {
+  font-weight: bold;
+  color: #58cc02;
+  font-size: 1.1rem;
+  min-width: 30px;
+}
+
+.leaderboard-item .name {
+  flex: 1;
+  margin: 0 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.leaderboard-item .score {
+  font-weight: bold;
+  color: #58cc02;
+  font-size: 1rem;
+}
+
+.main-page.dark-mode .leaderboard h3 {
+  color: #58cc02;
+}
+
+.main-page.dark-mode .leaderboard-item .name {
+  color: white;
+}

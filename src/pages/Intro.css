@@ -1,0 +1,44 @@
+
+.intro-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4b4b4b;
+  cursor: pointer;
+}
+
+.intro-content {
+  text-align: center;
+}
+
+.intro-title {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.intro-title .duolingo-text {
+  /* Fontun kendi gömülü rengini gizle */
+  color: transparent !important;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+  
+  /* Gölgeyi fontun tam üstüne oturt ve siyah renk ver */
+  text-shadow: 0 0 0 #ffffff;
+}
+
+.intro-title .gis-text {
+  /* Fontun kendi gömülü rengini gizle */
+  color: transparent !important;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+  
+  /* Gölgeyi fontun tam üstüne oturt ve turuncu renk ver */
+  text-shadow: 0 0 0 #ff9600;
+}
+
+.fade-in {
+  opacity: 1 !important;
+}
