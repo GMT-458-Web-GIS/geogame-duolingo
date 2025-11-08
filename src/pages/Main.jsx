@@ -359,19 +359,20 @@ const Main = () => {
                           />
                         </button>
 
-                        {/* Sonuç Gösterimi */}
-                        {isAnswerChecked && (
-                          <div className={`result-message ${checkState === 'correct' ? 'correct' : 'incorrect'}`}>
-                            <img 
-                              src={checkState === 'correct' ? '/images/duo/true.png' : '/images/duo/false.png'} 
-                              alt="Result" 
-                            />
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
             </>
+          )}
+          
+          {/* Sonuç Gösterimi - Left Panel Alt */}
+          {isAnswerChecked && (
+            <div className={`result-message ${checkState === 'correct' ? 'correct' : 'incorrect'}`}>
+              <img 
+                src={checkState === 'correct' ? '/images/duo/true.png' : '/images/duo/false.png'} 
+                alt="Result" 
+              />
+            </div>
           )}
         </div>
         <div className="hover-container center-panel">

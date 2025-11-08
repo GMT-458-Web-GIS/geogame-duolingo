@@ -111,6 +111,7 @@
   padding: 20px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .main-page.dark-mode .left-panel {
@@ -708,25 +709,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 20px;
   width: 100%;
   height: 100%;
   gap: 20px;
+  padding-top: 40px;
 }
 
 .question-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   width: 100%;
   max-width: 400px;
 }
 
 .question-image {
-  width: 100%;
-  height: auto;
+  width: 140%;
+  height: 160px;
+  left: -20px;
+  top: 15%;
+
   object-fit: contain;
 }
 
@@ -764,8 +769,8 @@
 }
 
 .check-button {
-  width: 80px;
-  height: 80px;
+  width: 140px;
+  height: 140px;
   background: none;
   border: none;
   cursor: pointer;
@@ -791,9 +796,14 @@
 }
 
 .result-message {
-  width: 120px;
-  height: 120px;
+  width: 770px;  /* 120px * 3 */
+  height: 170px; /* 120px * 3 */
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   animation: popIn 0.4s ease-out;
+  z-index: 1000;
 }
 
 .result-message img {
