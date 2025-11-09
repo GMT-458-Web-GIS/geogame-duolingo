@@ -28,6 +28,7 @@ const Main = () => {
   const [currentQuestion, setCurrentQuestion] = useState(null); // Mevcut soru için ülke
   const [flagOptions, setFlagOptions] = useState([]); // 4 bayrak seçeneği
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null); // Doğru cevabın index'i
+  const [correctlyAnsweredCountries, setCorrectlyAnsweredCountries] = useState([]); // Doğru bilinen ülkeler
   const vectorSourceRef = useRef(null);
   const vectorLayerRef = useRef(null);
   const tileLayerRef = useRef(null); // OSM tile layer referansı
@@ -35,6 +36,39 @@ const Main = () => {
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
+  };
+
+  const highlightCountryOnMap = (countryName) => {
+    if (!vectorLayerRef.current) return;
+
+    // Style fonksiyonu: ülkeleri durumlarına göre renklendir
+    const styleFunction = (feature) => {
+      const featureName = feature.get('name') || feature.get('NAME') || feature.get('admin');
+      const isTargetCountry = featureName && featureName.toLowerCase().includes(countryName.toLowerCase());
+      const isCorrectlyAnswered = correctlyAnsweredCountries.some(country => 
+        featureName && featureName.toLowerCase().includes(country.toLowerCase())
+      );
+      
+      let fillColor = 'rgba(255, 255, 255, 0.1)'; // Varsayılan renk
+      
+      if (isCorrectlyAnswered) {
+        fillColor = '#58cc02'; // Doğru bilinen ülkeler yeşil
+      } else if (isTargetCountry) {
+        fillColor = '#ffc800'; // Mevcut soru sarı
+      }
+      
+      return new Style({
+        stroke: new Stroke({
+          color: '#666',
+          width: 1
+        }),
+        fill: new Fill({
+          color: fillColor
+        })
+      });
+    };
+
+    vectorLayerRef.current.setStyle(styleFunction);
   };
 
   const loadContinentMap = (section) => {
@@ -118,6 +152,11 @@ const Main = () => {
         duration: 1000
       });
     }
+
+    // Haritada sorduğu ülkeyi vurgula (harita yüklendikten sonra)
+    setTimeout(() => {
+      highlightCountryOnMap(correctCountry.name);
+    }, 600); // GeoJSON yüklenmesi için bekle
   };
 
   const handleAnswerSelect = (flagIndex) => {
@@ -131,6 +170,14 @@ const Main = () => {
       // Doğru/yanlış kontrolü
       if (selectedAnswer === correctAnswerIndex) {
         setCheckState('correct');
+        // Doğru cevaplanan ülkeyi listeye ekle
+        if (currentQuestion && !correctlyAnsweredCountries.includes(currentQuestion.name)) {
+          setCorrectlyAnsweredCountries(prev => [...prev, currentQuestion.name]);
+          // Haritada rengi güncelle
+          setTimeout(() => {
+            highlightCountryOnMap(currentQuestion.name);
+          }, 100);
+        }
         // Doğru ses çal
         const correctAudio = new Audio('/sfx/true.mp3');
         correctAudio.volume = 0.5;
@@ -143,6 +190,16 @@ const Main = () => {
         wrongAudio.play().catch(error => console.log('Audio play failed:', error));
       }
     }
+  };
+
+  const handleContinueClick = () => {
+    // Yeni soru için durumları sıfırla
+    setSelectedAnswer(null);
+    setIsAnswerChecked(false);
+    setCheckState('initial');
+    
+    // Yeni soru oluştur
+    startLevel(selectedSection);
   };
 
   const startGame = () => {
@@ -464,11 +521,21 @@ const Main = () => {
                           ))}
                         </div>
 
-                        {/* Check Button */}
-                        <button className="check-button" onClick={handleCheckClick} disabled={selectedAnswer === null}>
+                        {/* Check/Continue Button */}
+                        <button 
+                          className="check-button" 
+                          onClick={checkState === 'correct' ? handleContinueClick : handleCheckClick} 
+                          disabled={selectedAnswer === null && checkState !== 'correct'}
+                        >
                           <img 
-                            src={selectedAnswer !== null ? '/images/duo/check-2.png' : '/images/duo/check-1.png'} 
-                            alt="Check" 
+                            src={
+                              checkState === 'correct' 
+                                ? '/images/duo/continue.png' 
+                                : selectedAnswer !== null 
+                                  ? '/images/duo/check-2.png' 
+                                  : '/images/duo/check-1.png'
+                            } 
+                            alt={checkState === 'correct' ? 'Continue' : 'Check'} 
                           />
                         </button>
 
